@@ -27,10 +27,10 @@ export default function Home() {
     // { field: 'col2', headerName: 'Column 2', width: 150 },
   ];
 
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+  const APIBASE = process.env.NEXT_PUBLIC_API_BASE;
   console.log(`${API_BASE}/category`);
   async function fetchCategory() {
-    const data = await fetch(`${APIBASE}/category`);
+  const data = await fetch(`${APIBASE}/category`);
     const c = await data.json();
     const c2 = c.map((category) => {
       category.id = category._id;
@@ -62,7 +62,7 @@ export default function Home() {
       });
       return
     }
-    fetch(`${APIBASE}/category`, {
+  fetch(`${APIBASE}/category`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
