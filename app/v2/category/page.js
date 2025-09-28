@@ -24,7 +24,7 @@ export default function Home() {
   const [category, setCategory] = useState([]);
   const columns = [
     { field: "name", headerName: "Category Name", width: 150 },
-    // { field: 'col2', headerName: 'Column 2', width: 150 },
+    { field: "order", headerName: "Order", width: 100 }
   ];
 
   const APIBASE = process.env.NEXT_PUBLIC_API_BASE;
@@ -76,54 +76,6 @@ export default function Home() {
 
   return (
     <main>
-      {/* <form onSubmit={handleSubmit(createCategory)}>
-        <div className="grid grid-cols-2 gap-4 w-fit m-4">
-          <div>Category:</div>
-          <div>
-            <input
-              name="name"
-              type="text"
-              {...register("name", { required: true })}
-              className="border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
-          </div>
-          <div>Order:</div>
-          <div>
-            <input
-              name="order"
-              type="number"
-              {...register("order", { required: true, defaultValue: 0 })}
-              className="border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
-          </div>
-          <div className="col-span-2 text-right">
-            {editMode ?
-              <input
-                type="submit"
-                value="Update"
-                className="bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-              />
-
-              :
-              <input
-                type="submit"
-                value="Add"
-                className="bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
-              />
-            }
-            {
-              editMode &&
-              <button
-                onClick={() => {
-                  reset({ name: '', order: '' })
-                  setEditMode(false)
-                }}
-                className="ml-2 bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full"
-              >Cancel</button>
-            }
-          </div>
-        </div>
-      </form> */}
       <div className="mx-4">
         <span>Category ({category.length})</span>
         <IconButton aria-label="new-category" color="secondary" onClick={handleOpen}>
@@ -137,13 +89,15 @@ export default function Home() {
         >
           <CategoryForm onSubmit={handleCategoryFormSubmit} />
         </Modal>
-        <DataGrid
-          slots={{
-            toolbar: GridToolbar,
-          }}
-          rows={category}
-          columns={columns}
-        />
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid
+            slots={{ toolbar: GridToolbar }}
+            rows={category}
+            columns={columns}
+            pageSize={5}
+            autoHeight
+          />
+        </div>
       </div>
     </main>
   );
